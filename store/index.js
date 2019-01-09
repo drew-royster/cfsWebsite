@@ -11,19 +11,16 @@ const createStore = () => {
   return new Vuex.Store({
     state,
     mutations: {
-      SHOW_POPUP(state) {
-        state.donatePopup = true;
-      },
-      HIDE_POPUP(state) {
-        state.donatePopup = false;
+      SHOW_POPUP(state, payload) {
+        state.donatePopup = payload;
       }
     },
     actions: {
       togglePopup({ commit }) {
         if (state.donatePopup) {
-          commit('HIDE_POPUP');
+          commit('SHOW_POPUP', false);
         } else {
-          commit('SHOW_POPUP');
+          commit('SHOW_POPUP', true);
         }
       }
     },

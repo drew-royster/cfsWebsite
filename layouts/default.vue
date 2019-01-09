@@ -13,7 +13,8 @@
           <v-btn style="color:black" flat href="https://drewroyster.com">Author</v-btn>
           <v-btn style="color:black" flat href="https://github.com/drew-royster/canvasFileSync">Code</v-btn>
           <v-btn style="color:black" flat to="/faq">FAQ</v-btn>
-          <v-btn style="color:black" flat @click="$store.dispatch('togglePopup')">Donate</v-btn>
+          <v-btn style="color:black" flat @click="togglePopup()">Donate</v-btn>
+          <v-btn style="color:black" flat to="/contact">Contact</v-btn>
           <!-- <v-btn flat to="/">Home</v-btn>
           <v-btn flat to="/about">About</v-btn> -->
         </v-toolbar-items>
@@ -30,10 +31,20 @@
         >CANVAS FILE SYNC &copy; {{ new Date().getFullYear() }}</v-flex>
       </v-footer>
     </v-app>
+    <Donate/>
   </div>
 </template>
 <script>
+import Donate from '../components/donate.vue';
 export default {
-  name: 'cfs'
+  name: 'cfs',
+  methods: {
+    togglePopup() {
+      this.$store.dispatch('togglePopup');
+    }
+  },
+  components: {
+    Donate
+  }
 }
 </script>

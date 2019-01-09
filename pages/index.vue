@@ -41,7 +41,7 @@
                         </v-flex>
                       </v-layout>
                     </div>
-                    <div v-else>
+                    <div v-else-if="enabled===1">
                       <v-layout row align-center>
                         <v-flex class="text-xs-center">
                           <v-btn 
@@ -64,19 +64,24 @@
                         </v-flex>
                       </v-layout>
                     </div>
+                    <div v-else>
+                      <v-layout row align-center>
+                        <v-flex class="text-xs-center">
+                          <h1>This is a Win/Mac app. Visit this site using one of those to download</h1>        
+                        </v-flex>
+                      </v-layout>
+                    </div>
                 </v-flex>
               </v-layout>
             </v-card>
         </v-layout>
       </v-parallax>
     </section>
-    <Donate/>
   </v-content>
 </template>
 
 <script>
 import VueMarkdown from 'vue-markdown';
-import Donate from './Donate.vue';
 import axios from 'axios';
 const platform = require('platform');
 
@@ -89,6 +94,7 @@ export default {
       enabled: 0,
       winDownloadLink: null,
       macDownloadLink: null,
+      operatingSystem: null,
       versions: [
         {
           name: 'Mac',
@@ -108,7 +114,6 @@ export default {
   },
   components: {
     VueMarkdown,
-    Donate,
   },
   computed: {
     parallax_image: function() {
@@ -142,9 +147,14 @@ export default {
     },
   },
   mounted() {
+    this.operatingSystem = platform.os.family;
     // eslint-disable-next-line
     if (platform.os.family.includes('Windows')) {
       this.enabled = 1;
+    } else if (platform.os.family.includes('OS X')) {
+      this.enabled = 0;
+    } else {
+      this.enabled = -1;
     }
 
     const options = {

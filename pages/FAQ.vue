@@ -20,15 +20,13 @@
         </v-expansion-panel>
       </v-flex>
     </v-layout>
-    <Donate/>
   </v-content>
 </template>
 
 <script>
-import Donate from './Donate.vue';
 
 export default {
-  name: 'FAQ',
+  name: 'faq',
   data () {
     return {
       items: [
@@ -62,9 +60,6 @@ export default {
         },
       ]
     }
-  },
-  components: {
-    Donate,
   }
 }
 </script>

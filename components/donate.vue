@@ -10,11 +10,13 @@
       >
         Can you help keep this going?
       </v-card-title>
-        <v-layout row align-center justify-center>
+        <v-layout row align-center>
           <v-flex sm6 xs12>
+            <v-layout justify-center>
               <v-avatar size="200px">
-              <v-img max-width="200px" max-height="200px" :src="drew_face"></v-img>
-            </v-avatar>
+                <v-img max-width="200px" max-height="200px" :src="drew_face"></v-img>
+              </v-avatar>
+            </v-layout>
           </v-flex>
           <v-flex sm6 xs12>
             <v-card-text>
@@ -51,7 +53,7 @@
 </template>
 <script>
 export default {
-  name: "Donate",
+  name: "donate",
   computed: {
     drew_face: function() {
       return require('@/assets/drew.jpg');
@@ -60,8 +62,8 @@ export default {
       get: function() {
         return this.$store.getters.donatePopup;
       },
-      set: function() {
-        this.$store.dispatch('togglePopup');
+      set: function(val) {
+        this.$store.commit('SHOW_POPUP', val);
       },
     }
   },
